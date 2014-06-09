@@ -91,10 +91,10 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    #'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django.contrib.flatpages',
+    'django.contrib.flatpages',
     'django.contrib.sitemaps',
     'grappelli.dashboard',
     'grappelli',
@@ -153,3 +153,5 @@ GRAPPELLI_INDEX_DASHBOARD = 'siscoer.dashboard.CustomIndexDashboard'
 
 
 LOGOUT_URL = '/'
+
+LOGIN_URL = '/admin'
