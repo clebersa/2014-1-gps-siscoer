@@ -81,7 +81,7 @@ class Saida(Model):
         verbose_name_plural = _(u'5 - Saída')
     produto = ForeignKey('Produto', verbose_name=_(u'Produto'),)
     quantidade = PositiveIntegerField(verbose_name=_(u'Quantidade'), blank=True, null=True, default=0)
-    motivo = CharField(verbose_name=_(u'Motivo'), max_length=100, help_text=_(u'Ex.: Uso, Estragado, Doação, etc.'), blank=True, null=True, )
+    motivo = CharField(verbose_name=_(u'Motivo'), max_length=100, help_text=_(u'Ex.: Consumiu, Estragou, Doação e Outro.'), blank=True, null=True, )
     cadastro = DateTimeField(verbose_name=_(u'Data Cadastro'), auto_now_add=True, editable=False)
     alteracao = DateTimeField(verbose_name=_(u'Data Alteração'), auto_now=True, editable=False)
 
