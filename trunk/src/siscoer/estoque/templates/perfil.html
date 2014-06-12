@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{% block principal %}
+<div class="main-content">
+
+{% block cabecalho %}
+<div class="row">
+
+    <!-- Profile Info and Notifications -->
+    <div class="col-md-6 col-sm-8 clearfix">
+
+        <ul class="user-info pull-left pull-none-xsm">
+
+                        <!-- Profile Info -->
+            <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Você está logado como: {{ usuario.login }}
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- Raw Links -->
+    <div class="col-md-6 col-sm-4 clearfix hidden-xs">
+
+        <ul class="list-inline links-list pull-right">
+            <li >
+                <span>Último Login: {{ afiliado.user.last_login }}</span>
+            </li>
+
+            <li class="sep"></li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    Sair <i class="entypo-logout right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <ul class="user-info pull-left pull-right-xs pull-none-xsm">
+        <!-- Raw Notifications -->
+
+    </ul>
+
+</div>
+{% endblock cabecalho %}
+
+
+<!-- INICIO CONTEÚDO PRINCIPAL -->
+
+{% block diaD %}
+{% endblock diaD %}
+
+{% block alerta %}
+{% endblock alerta %}
+
+{% block breadcrumbs %}
+<br />
+<ol class="breadcrumb bc-2">
+    <li>
+        <a href="/painel/home/{{ afiliado.user.username }}"><i class="entypo-home"></i>Home</a>
+    </li>
+    <li class="active">
+        <a href="">Perfil</a>
+    </li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block resumo %}
+{% endblock resumo %}
+
+{% block estatisticas %}
+{% endblock estatisticas %}
+
+{% block conteudo_principal %}
+<div class="profile-env">
+
+	<header class="row">
+
+		<div class="col-sm-2">
+
+			<a href="#" class="profile-picture">
+
+			</a>
+
+		</div>
+
+		<div class="col-sm-7">
+
+		</div>
+
+	</header>
+
+	<section class="profile-info-tabs">
+		<div class="row">
+			<div class="col-sm-offset-2 col-sm-10">
+				<ul class="user-details">
+					<li>
+						<a href="#">
+							<i class="entypo-user"></i>
+							Usuário: {{ usuario.login }}
+						</a>
+					</li>
+				</ul>
+
+				<!-- tabs for the profile links -->
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#">Dados do Perfil</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="profile-feed">
+
+        <div class="alert alert-success" style="display:{{ display }}">
+            {% if mostrar %}<h4>{{ mostrar }}</h4>{% endif %}
+        </div>
+
+		<!-- profile post form -->
+		<form class="form-horizontal" enctype="multipart/form-data" method="post">{% csrf_token %}
+            <p><strong>Obs.: Campos com '*' são obrigatórios.</strong></p>
+
+			<div class="form-options">
+                <div class="form-group">
+				{{ form.as_p }}
+                </div>
+
+				<div class="post-submit">
+                    <input type="submit" class="btn btn-primary" value="SALVAR" />
+				</div>
+
+			</div>
+		</form>
+
+	</section>
+</div>
+{% endblock conteudo_principal %}
+
+<!-- FIM CONTEÚDO PRINCIPAL -->
+
+{% block rodape %}
+    <!-- Footer -->
+    <footer class="main">
+        &copy; 2014 <strong>SISCOER</strong>
+    </footer>
+{% endblock rodape %}
+
+
+</div> <!--- FIM DA MAIN -->
+{% endblock principal %}

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{% block principal %}
+<div class="main-content">
+
+{% block cabecalho %}
+<div class="row">
+
+    <!-- Profile Info and Notifications -->
+    <div class="col-md-6 col-sm-8 clearfix">
+
+        <ul class="user-info pull-left pull-none-xsm">
+
+                        <!-- Profile Info -->
+            <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Você está logado como: {{ usuario.login }}
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- Raw Links -->
+    <div class="col-md-6 col-sm-4 clearfix hidden-xs">
+
+        <ul class="list-inline links-list pull-right">
+            <li >
+                <span>Último Login: {{ usuario.user.last_login }}</span>
+            </li>
+
+            <li class="sep"></li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    Sair <i class="entypo-logout right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <ul class="user-info pull-left pull-right-xs pull-none-xsm">
+        <!-- Raw Notifications -->
+
+    </ul>
+
+</div>
+{% endblock cabecalho %}
+
+
+<!-- INICIO CONTEÚDO PRINCIPAL -->
+
+{% block diaD %}
+{% endblock diaD %}
+
+{% block alerta %}
+{% endblock alerta %}
+
+{% block breadcrumbs %}
+<br />
+<ol class="breadcrumb bc-2">
+    <li>
+        <a href="/estoque/home/{{ username }}"><i class="entypo-home"></i>Home</a>
+    </li>
+    <li class="active">
+        <a href="/estoque/produto/{{ username }}"></i>Listar Produtos</a>
+    </li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block resumo %}
+{% endblock resumo %}
+
+{% block estatisticas %}
+{% endblock estatisticas %}
+
+{% block conteudo_principal %}
+
+{% if produto %}
+<div class="panel panel-primary">
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Nome</th>
+                <th>Unidade</th>
+                <th>Data Cadastro</th>
+            </tr>
+        </thead>
+        {% for n in produto %}
+        <tbody>
+            <tr>
+                <td>{{ n.categoria }}</td>
+                <td>{{ n.descricao }}</td>
+                <td>{{ n.get_unidade_display }}</td>
+                <td>{{ n.cadastro }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+<br />
+{% endif %}
+
+<div class="post-submit">
+    <a href="/estoque/cadastrar_produto/{{ username }}" class="btn btn-primary">CADASTRAR NOVO</a>
+</div>
+
+{% endblock conteudo_principal %}
+
+<!-- FIM CONTEÚDO PRINCIPAL -->
+
+{% block rodape %}
+    <!-- Footer -->
+    <footer class="main">
+        &copy; 2014 <strong>SISCOER</strong>
+    </footer>
+{% endblock rodape %}
+
+
+</div> <!--- FIM DA MAIN -->
+{% endblock principal %}
