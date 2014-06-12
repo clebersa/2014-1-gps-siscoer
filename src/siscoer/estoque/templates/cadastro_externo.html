@@ -1,0 +1,108 @@
+{% extends "base_externa.html" %}
+
+{% load i18n %}
+
+
+{% block principal %}
+<div class="main-content">
+
+{% block cabecalho %}
+
+{% endblock cabecalho %}
+
+
+<!-- INICIO CONTEÚDO PRINCIPAL -->
+
+{% block diaD %}
+{% endblock diaD %}
+
+{% block alerta %}
+{% endblock alerta %}
+
+{% block breadcrumbs %}
+
+{% endblock breadcrumbs %}
+
+{% block resumo %}
+{% endblock resumo %}
+
+{% block estatisticas %}
+{% endblock estatisticas %}
+
+{% block conteudo_principal %}
+<div class="profile-env">
+
+	<section class="profile-feed">
+
+        <div class="alert alert-success" style="display:{{ display }}">
+            {% if mostrar %}<h4>{{ mostrar }}</h4>{% endif %}
+        </div>
+
+		<!-- profile post form -->
+		<form class="form-horizontal" method="post">{% csrf_token %}
+
+			<div class="form-options">
+
+				<fieldset>
+
+				<legend class="my_font">Cadastro de Usuário - SISCOER</legend>
+
+                <div class="form-group">
+					<label class="col-sm-1 control-label" accesskey="U">{{ form.login.label }}</label>
+                    <div class="col-sm-5">
+                    {{ form.login }}
+                    {{ form.login.help_text }}
+                    {{ form.login.errors }}
+                    </div>
+				</div>
+                <div class="form-group">
+					<label class="col-sm-1 control-label" accesskey="U">{{ form.senha.label }}</label>
+                    <div class="col-sm-5">
+                    {{ form.senha }}
+                    {{ form.senha.help_text }}
+                    {{ form.senha.errors }}
+                    </div>
+				</div>
+
+                <div class="form-group">
+					<label class="col-sm-1 control-label" accesskey="U">{{ form.pergunta.label }}</label>
+                    <div class="col-sm-5">
+                    {{ form.pergunta }}
+                    {{ form.pergunta.help_text }}
+                    {{ form.pergunta.errors }}
+                    </div>
+				</div>
+                <div class="form-group">
+					<label class="col-sm-1 control-label" accesskey="U">{{ form.resposta.label }}</label>
+                    <div class="col-sm-5">
+                    {{ form.resposta }}
+                    {{ form.resposta.help_text }}
+                    {{ form.resposta.errors }}
+                    </div>
+				</div>
+
+			</fieldset>
+
+				<div class="post-submit">
+                    <input type="submit" class="btn btn-primary" value="CADASTRAR" />
+				</div>
+
+			</div>
+		</form>
+
+	</section>
+</div>
+{% endblock conteudo_principal %}
+
+<!-- FIM CONTEÚDO PRINCIPAL -->
+
+{% block rodape %}
+    <!-- Footer -->
+    <footer class="main">
+        &copy; 2014 <strong>SISCOER</strong>
+    </footer>
+{% endblock rodape %}
+
+
+</div> <!--- FIM DA MAIN -->
+{% endblock principal %}

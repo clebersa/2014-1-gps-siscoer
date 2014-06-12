@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{% block principal %}
+<div class="main-content">
+
+{% block cabecalho %}
+<div class="row">
+
+    <!-- Profile Info and Notifications -->
+    <div class="col-md-6 col-sm-8 clearfix">
+
+        <ul class="user-info pull-left pull-none-xsm">
+
+                        <!-- Profile Info -->
+            <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Você está logado como: {{ usuario.login }}
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- Raw Links -->
+    <div class="col-md-6 col-sm-4 clearfix hidden-xs">
+
+        <ul class="list-inline links-list pull-right">
+            <li >
+                <span>Último Login: {{ usuario.user.last_login }}</span>
+            </li>
+
+            <li class="sep"></li>
+
+            <li>
+                <a href="/logout/">
+                    Sair <i class="entypo-logout right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <ul class="user-info pull-left pull-right-xs pull-none-xsm">
+        <!-- Raw Notifications -->
+
+    </ul>
+
+</div>
+{% endblock cabecalho %}
+
+
+<!-- INICIO CONTEÚDO PRINCIPAL -->
+
+{% block breadcrumbs %}
+<ol class="breadcrumb bc-2">
+    <li class="active">
+        <a href="/estoque/home/{{ usuario.user.username }}"><i class="entypo-home"></i>Home</a>
+    </li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block resumo %}
+<h2>Resumo</h2>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="tile-stats tile-green">
+            <div class="icon"><i class="entypo-check"></i></div>
+            <div class="num">{{ qtd_estoque }}</div>
+
+            <h3>Tipos de Estoque</h3>
+            <p>Quantidade de tipos de estoque cadastrado no software.</p>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="tile-stats tile-blue">
+            <div class="icon"><i class="entypo-flow-tree"></i></div>
+            <div class="num">{{ qtd_categorias }}</div>
+
+            <h3>Categorias</h3>
+            <p>Quantidade de categorias cadastradas no software.</p>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="tile-stats tile-red">
+            <div class="icon"><i class="entypo-check"></i></div>
+            <div class="num">{{ qtd_produtos }}</div>
+
+            <h3>Produtos</h3>
+            <p>Quantidade de tipos de produtos cadastrados no software.</p>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="tile-stats tile-orange">
+            <div class="icon"><i class="entypo-flow-tree"></i></div>
+            <div class="num">{{ qtd_produtos_estoque }}</div>
+
+            <h3>Produtos em Estoque</h3>
+            <p>Quantidade de Produtos que possui ao menos 1 item em estoque.</p>
+        </div>
+    </div>
+
+</div>
+{% endblock resumo %}
+
+{% block estatisticas %}
+
+{% endblock estatisticas %}
+
+{% block conteudo_principal %}
+
+{% endblock conteudo_principal %}
+
+<!-- FIM CONTEÚDO PRINCIPAL -->
+
+{% block rodape %}
+    <!-- Footer -->
+    <footer class="main">
+        &copy; 2014 <strong>SISCOER</strong>
+    </footer>
+{% endblock rodape %}
+
+
+</div> <!--- FIM DA MAIN -->
+{% endblock principal %}

@@ -154,4 +154,4 @@ GRAPPELLI_INDEX_DASHBOARD = 'siscoer.dashboard.CustomIndexDashboard'
 
 LOGOUT_URL = '/'
 
-LOGIN_URL = '/admin'
+LOGIN_URL = '/login'
