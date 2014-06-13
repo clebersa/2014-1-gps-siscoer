@@ -17,6 +17,9 @@ class Localizacao(Model):
     def __unicode__(self):
         return u'%s' % self.descricao
 
+    def get_absolute_url(self):
+        return reverse('estoque.views.deletar_estoque', kwargs={'id': self.id, 'op': 0})
+
 
 class Categoria(Model):
     class Meta:
@@ -29,6 +32,9 @@ class Categoria(Model):
 
     def __unicode__(self):
         return u'%s' % self.descricao
+
+    def get_absolute_url(self):
+        return reverse('estoque.views.deletar_categoria', kwargs={'id': self.id, 'op': 0})
 
 
 class Produto(Model):
@@ -50,6 +56,9 @@ class Produto(Model):
 
     def __unicode__(self):
         return u'%s' % self.descricao
+
+    def get_absolute_url(self):
+        return reverse('estoque.views.deletar_produto', kwargs={'id': self.id, 'op': 0})
 
 
 class Entrada(Model):
@@ -81,7 +90,6 @@ class Baixa(Model):
     class Meta:
         verbose_name = _(u'Baixa')
         verbose_name_plural = _(u'5 - Baixa')
-    #produto = ForeignKey('Produto', verbose_name=_(u'Produto'),)
     entrada = ForeignKey('Entrada', verbose_name=_(u'Produto'),)
     quantidade = PositiveIntegerField(verbose_name=_(u'Quantidade'), blank=True, null=True, default=0)
     motivo = PositiveSmallIntegerField(verbose_name=_(u'Motivo'), choices=MOTIVO, default=None)
@@ -97,3 +105,4 @@ from signals import update_quantidade, delete_quantidade, efetua_baixa
 post_save.connect(update_quantidade, sender=Entrada)
 post_delete.connect(delete_quantidade, sender=Entrada)
 post_save.connect(efetua_baixa, sender=Baixa)
+

@@ -93,6 +93,7 @@
                 <th>Nome</th>
                 <th>Unidade</th>
                 <th>Data Cadastro</th>
+                <th>Ação</th>
             </tr>
         </thead>
         {% for n in produto %}
@@ -102,6 +103,7 @@
                 <td>{{ n.descricao }}</td>
                 <td>{{ n.get_unidade_display }}</td>
                 <td>{{ n.cadastro }}</td>
+                <th><a href="{{ n.get_absolute_url }}">Deletar</a></th>
             </tr>
         </tbody>
         {% endfor %}

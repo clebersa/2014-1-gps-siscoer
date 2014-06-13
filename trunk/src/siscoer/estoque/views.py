@@ -29,10 +29,10 @@ def start(request):
 def home(request, username):
     usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
 
-    qtd_estoque = 0
-    qtd_categorias = 0
-    qtd_produtos = 0
-    qtd_produtos_estoque = 0
+    qtd_estoque = Localizacao.objects.filter(ativo=True).count()
+    qtd_categorias = Categoria.objects.filter(ativo=True).count()
+    qtd_produtos = Produto.objects.all().count()
+    qtd_produtos_estoque = Entrada.objects.filter(finalizado=False).count()
 
     return render_to_response('index.html', locals(), context_instance=RequestContext(request),)
 
@@ -97,6 +97,7 @@ def estoque(request, username):
     usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
 
     estoque = Localizacao.objects.all().exclude(ativo=False)
+    op = 0
 
     return render_to_response('estoque.html', locals(), context_instance=RequestContext(request),)
 
@@ -126,10 +127,24 @@ def cadastrar_estoque(request, username):
 
 
 @login_required
+def deletar_estoque(request, id, op):
+    usuario = get_object_or_404(Usuario, user=request.user,)
+    username = request.user.username
+    estoque = get_object_or_404(Localizacao, id=id,)
+
+    if op == 1 or op == '1':
+        estoque.delete()
+        return render_to_response('excluido_sucesso.html', locals(), context_instance=RequestContext(request),)
+
+    return render_to_response('deletar_estoque.html', locals(), context_instance=RequestContext(request),)
+
+
+@login_required
 def categoria(request, username):
     usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
 
     categoria = Categoria.objects.all().exclude(ativo=False)
+    op = 0
 
     return render_to_response('categoria.html', locals(), context_instance=RequestContext(request),)
 
@@ -159,10 +174,24 @@ def cadastrar_categoria(request, username):
 
 
 @login_required
+def deletar_categoria(request, id, op):
+    usuario = get_object_or_404(Usuario, user=request.user,)
+    username = request.user.username
+    categoria = get_object_or_404(Categoria, id=id,)
+
+    if op == 1 or op == '1':
+        categoria.delete()
+        return render_to_response('excluido_sucesso.html', locals(), context_instance=RequestContext(request),)
+
+    return render_to_response('deletar_categoria.html', locals(), context_instance=RequestContext(request),)
+
+
+@login_required
 def produto(request, username):
     usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
 
     produto = Produto.objects.all()
+    op = 0
 
     return render_to_response('produto.html', locals(), context_instance=RequestContext(request),)
 
@@ -191,6 +220,19 @@ def cadastrar_produto(request, username):
         form = CadastroProdutoForm()
 
     return render_to_response('cadastrar_produto.html', locals(), context_instance=RequestContext(request),)
+
+
+@login_required
+def deletar_produto(request, id, op):
+    usuario = get_object_or_404(Usuario, user=request.user,)
+    username = request.user.username
+    produto = get_object_or_404(Produto, id=id,)
+
+    if op == 1 or op == '1':
+        produto.delete()
+        return render_to_response('excluido_sucesso.html', locals(), context_instance=RequestContext(request),)
+
+    return render_to_response('deletar_produto.html', locals(), context_instance=RequestContext(request),)
 
 
 @login_required
@@ -330,7 +372,108 @@ def data_acabou(request, username):
     return render_to_response('data_acabou.html', locals(), context_instance=RequestContext(request),)
 
 
+@login_required
+def historico_por_estoque(request, username):
+    usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
+
+    estoque = Localizacao.objects.all().exclude(ativo=False)
+    baixa = Baixa.objects.all()
+
+    return render_to_response('historico_por_estoque.html', locals(), context_instance=RequestContext(request),)
 
 
+@login_required
+def historico_por_estoque_semanal(request, username):
+    usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
+
+    baixa = []
+    periodo = datetime.datetime.now() - datetime.timedelta(days=7)
+
+    estoque = Localizacao.objects.all().exclude(ativo=False)
+    consumo = Baixa.objects.all()
+
+    for c in consumo:
+        if c.cadastro.date() > periodo.date():
+            baixa.append(c)
+
+    return render_to_response('historico_por_estoque_semanal.html', locals(), context_instance=RequestContext(request),)
+
+
+@login_required
+def historico_por_estoque_quinzenal(request, username):
+    usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
+
+    baixa = []
+    periodo = datetime.datetime.now() - datetime.timedelta(days=15)
+
+    estoque = Localizacao.objects.all().exclude(ativo=False)
+    consumo = Baixa.objects.all()
+
+    for c in consumo:
+        if c.cadastro.date() > periodo.date():
+            baixa.append(c)
+
+    return render_to_response('historico_por_estoque_quinzenal.html', locals(), context_instance=RequestContext(request),)
+
+
+@login_required
+def historico_por_estoque_mensal(request, username):
+    usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
+
+    baixa = []
+    periodo = datetime.datetime.now() - datetime.timedelta(days=30)
+
+    estoque = Localizacao.objects.all().exclude(ativo=False)
+    consumo = Baixa.objects.all()
+
+    for c in consumo:
+        if c.cadastro.date() > periodo.date():
+            baixa.append(c)
+
+    return render_to_response('historico_por_estoque_mensal.html', locals(), context_instance=RequestContext(request),)
+
+
+@login_required
+def historico_por_estoque_semestral(request, username):
+    usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
+
+    baixa = []
+    periodo = datetime.datetime.now() - datetime.timedelta(days=180)
+
+    estoque = Localizacao.objects.all().exclude(ativo=False)
+    consumo = Baixa.objects.all()
+
+    for c in consumo:
+        if c.cadastro.date() > periodo.date():
+            baixa.append(c)
+
+    return render_to_response('historico_por_estoque_semestral.html', locals(), context_instance=RequestContext(request),)
+
+
+@login_required
+def historico_por_estoque_anual(request, username):
+    usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
+
+    baixa = []
+    periodo = datetime.datetime.now() - datetime.timedelta(days=365)
+
+    estoque = Localizacao.objects.all().exclude(ativo=False)
+    consumo = Baixa.objects.all()
+
+    for c in consumo:
+        if c.cadastro.date() > periodo.date():
+            baixa.append(c)
+
+    return render_to_response('historico_por_estoque_anual.html', locals(), context_instance=RequestContext(request),)
+
+
+@login_required
+def historico_por_produto(request, username):
+    usuario = get_object_or_404(Usuario, user=request.user, user__username=username)
+
+    produto = Produto.objects.all()
+    baixa = Baixa.objects.all()
+
+    return render_to_response('historico_por_produto.html', locals(), context_instance=RequestContext(request),)
 
 
