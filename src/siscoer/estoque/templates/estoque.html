@@ -91,6 +91,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Data Cadastro</th>
+                <th>Ação</th>
             </tr>
         </thead>
         {% for n in estoque %}
@@ -98,6 +99,7 @@
             <tr>
                 <td>{{ n.descricao }}</td>
                 <td>{{ n.cadastro }}</td>
+                <th><a href="{{ n.get_absolute_url }}">Deletar</a></th>
             </tr>
         </tbody>
         {% endfor %}

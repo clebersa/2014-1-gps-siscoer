@@ -71,7 +71,7 @@
         <a href="/estoque/home/{{ username }}"><i class="entypo-home"></i>Home</a>
     </li>
     <li class="active">
-        <a href="/estoque/categoria/{{ username }}"></i>Listar Categoria</a>
+        <a href="/estoque/historico_por_estoque_semestral/{{ username }}"></i>Histórico de Consumo por Estoque - Semestral</a>
     </li>
 </ol>
 {% endblock breadcrumbs %}
@@ -84,33 +84,36 @@
 
 {% block conteudo_principal %}
 
-{% if categoria %}
+{% if estoque %}
+{% for e in estoque %}
+<h3>.: {{ e.descricao }}</h3>
 <div class="panel panel-primary">
     <table class="table table-bordered table-responsive table-hover">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Data Cadastro</th>
-                <th>Ação</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Motivo</th>
+                <th>Data Consumo</th>
             </tr>
         </thead>
-        {% for n in categoria %}
+        {% for n in baixa %}
+        {% if n.entrada.localizacao == e %}
         <tbody>
             <tr>
-                <td>{{ n.descricao }}</td>
+                <td>{{ n.entrada }}</td>
+                <td>{{ n.quantidade }}</td>
+                <td>{{ n.get_motivo_display }}</td>
                 <td>{{ n.cadastro }}</td>
-                <th><a href="{{ n.get_absolute_url }}">Deletar</a></th>
             </tr>
         </tbody>
+        {% endif %}
         {% endfor %}
     </table>
 </div>
-<br />
+{% endfor %}
 {% endif %}
 
-<div class="post-submit">
-    <a href="/estoque/cadastrar_categoria/{{ username }}" class="btn btn-primary">CADASTRAR NOVO</a>
-</div>
 
 {% endblock conteudo_principal %}
 
