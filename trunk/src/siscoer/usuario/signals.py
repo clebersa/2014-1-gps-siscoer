@@ -1,7 +1,7 @@
 #coding:utf-8
 from django.contrib.auth.models import User, Group
 
-def update_user(instance, created, *args,**kwargs):
+def update_user(instance, created, *args, **kwargs):
     if created:
         usuario = User()
         usuario.username = instance.login

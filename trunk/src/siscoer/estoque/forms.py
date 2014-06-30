@@ -16,6 +16,12 @@ class CadastroExternoForm(Form):
     pergunta = CharField(max_length=250, required=True, label=u'Pergunta Secreta', widget=TextInput(attrs={'class' : 'form-control'}))
     resposta = CharField(max_length=250, required=True, label=u'Resposta Secreta', widget=TextInput(attrs={'class' : 'form-control'}))
 
+    def clean_login(self):
+        login = self.cleaned_data['login']
+        if Usuario.objects.filter(login=login).exists():
+            raise ValidationError(u"Este nome de Login já existe")
+        return login
+
     def clean_mail(self):
         email_principal = self.cleaned_data['mail']
         if Usuario.objects.filter(mail=email_principal).exists():
