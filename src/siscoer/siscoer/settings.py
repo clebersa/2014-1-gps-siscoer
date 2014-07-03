@@ -70,7 +70,6 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = MC_ORIGINAL + (
     'django.middleware.http.ConditionalGetMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
@@ -132,6 +131,8 @@ LOGGING = {
 # ============================================================================
 # Local settings here
 # ============================================================================
+
+CACHE_MIDDLEWARE_SECONDS = 1
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP_ORIGINAL + (
     'django.core.context_processors.request',
