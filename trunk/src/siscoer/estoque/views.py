@@ -74,7 +74,6 @@ def cadastro(request):
         form = CadastroExternoForm(request.POST)
         if form.is_valid():
             dados = form.cleaned_data
-            email = form.clean_mail()
             cad = Usuario(
                 login = dados['login'],
                 senha = dados['senha'],
@@ -476,4 +475,23 @@ def historico_por_produto(request, username):
 
     return render_to_response('historico_por_produto.html', locals(), context_instance=RequestContext(request),)
 
+
+def request_user_pass(request):
+    from forms import RecuperarUserPassForm
+    form = RecuperarUserPassForm()
+    display = 'none;'
+    if request.method == 'POST':
+        form = RecuperarUserPassForm(request.POST)
+        if form.is_valid():
+            dados = form.cleaned_data
+            usuario = Usuario.objects.get(mail=form.clean_mail())
+            from functions import request_user_pass
+            request_user_pass(usuario)
+
+            display = 'block;'
+            mostrar = 'SUCESSO! Foi enviado o usuário e senha para seu Email.'
+            return render_to_response('request_user_pass.html', locals(), context_instance=RequestContext(request))
+    else:
+        form = RecuperarUserPassForm()
+    return render_to_response('request_user_pass.html', locals(), context_instance=RequestContext(request))
 
