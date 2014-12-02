@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{%  block menu %}
+<div class="sidebar-menu">
+
+    <header class="logo-env">
+        <!-- logo -->
+        <div class="logo">
+            <a href="index.html">
+                SISCOER
+            </a>
+        </div>
+
+        <!-- logo collapse icon -->
+        <div class="sidebar-collapse">
+            <a href="#" class="sidebar-collapse-icon with-animation">
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+
+        <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+        <div class="sidebar-mobile-menu visible-xs">
+            <a href="#" class="with-animation">
+                <i class="entypo-menu"></i>
+            </a>
+        </div>
+    </header>
+
+    {%  block menu_links %}
+    {%  endblock menu_links %}
+
+</div>
+{% endblock menu %}
+
+
+{% block principal %}
+<div class="main-content">
+
+{% block cabecalho %}
+{% endblock cabecalho %}
+
+<!-- INICIO CONTEÚDO PRINCIPAL -->
+
+{% block diaD %}
+{% endblock diaD %}
+
+{% block alerta %}
+{% endblock alerta %}
+
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block resumo %}
+{% endblock resumo %}
+
+{% block estatisticas %}
+{% endblock estatisticas %}
+
+{% block conteudo_principal %}
+    <div class="main-content">
+        <div class="page-error-404">
+            <div class="error-symbol">
+                <i class="entypo-attention"></i>
+            </div>
+            <div class="error-text">
+                <h2>500</h2>
+				<p>Desculpe! Ocorreu um erro interno. Por favor, tente mais tarde.</p>
+            </div>
+            <hr />
+        </div>
+    </div>
+{% endblock conteudo_principal %}
+
+<!-- FIM CONTEÚDO PRINCIPAL -->
+
+{% block rodape %}
+    <!-- Footer -->
+    <footer class="main">
+        &copy; 2014 <strong>SISCOER</strong>
+    </footer>
+{% endblock rodape %}
+
+
+</div> <!--- FIM DA MAIN -->
+{% endblock principal %}
