@@ -10,8 +10,8 @@ class UsuarioAdmin(ModelAdmin):
     form = UsuarioForm
     exclude = ['user',]
     readonly_fields = ['cadastro', 'alteracao',]
-    list_display = ['id', 'login', 'senha', 'mail', 'cadastro', 'alteracao',]
-    list_display_links = ['id', 'login', 'senha', 'mail', 'cadastro', 'alteracao',]
+    list_display = ['id', 'login', 'mail', 'cadastro', 'alteracao',]
+    list_display_links = ['id', 'login', 'mail', 'cadastro', 'alteracao',]
     search_fields = ['login', 'mail',]
     list_filter = ['cadastro', 'alteracao',]
     list_per_page = 50

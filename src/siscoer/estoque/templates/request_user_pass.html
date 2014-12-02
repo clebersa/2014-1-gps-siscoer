@@ -1,0 +1,84 @@
+{% extends "base_externa.html" %}
+
+{% load i18n %}
+
+
+{% block principal %}
+<div class="main-content">
+
+{% block cabecalho %}
+<div class="row">
+
+    <ul class="user-info pull-left pull-right-xs pull-none-xsm">
+        <!-- Raw Notifications -->
+
+    </ul>
+
+</div>
+{% endblock cabecalho %}
+
+
+<!-- INICIO CONTEÚDO PRINCIPAL -->
+
+{% block diaD %}
+{% endblock diaD %}
+
+{% block alerta %}
+{% endblock alerta %}
+
+{% block breadcrumbs %}
+<br />
+<ol class="breadcrumb bc-2">
+    <li class="active">
+        <a href="/"></i>HOME</a> | <a href="/request_user_pass/"></i>RECUPERAR USUÁRIO OU SENHA</a>
+    </li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block resumo %}
+{% endblock resumo %}
+
+{% block estatisticas %}
+{% endblock estatisticas %}
+
+{% block conteudo_principal %}
+<div class="profile-env">
+
+	<section class="profile-feed">
+
+        <div class="alert alert-success" style="display:{{ display }}">
+            {% if mostrar %}<h4>{{ mostrar }}</h4>{% endif %}
+        </div>
+
+		<!-- profile post form -->
+		<form class="form-horizontal" method="post">{% csrf_token %}
+
+			<div class="form-options">
+
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+
+				<div class="post-submit">
+                    <input type="submit" class="btn btn-primary" value="RECUPERAR" />
+				</div>
+
+			</div>
+		</form>
+
+	</section>
+</div>
+{% endblock conteudo_principal %}
+
+<!-- FIM CONTEÚDO PRINCIPAL -->
+
+{% block rodape %}
+    <!-- Footer -->
+    <footer class="main">
+        &copy; 2014 <strong>SISCOER</strong>
+    </footer>
+{% endblock rodape %}
+
+
+</div> <!--- FIM DA MAIN -->
+{% endblock principal %}

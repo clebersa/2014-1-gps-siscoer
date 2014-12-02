@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^$', 'estoque.views.start',),
     url(r'^estoque/', include('estoque.urls')),
     url(r'^cadastro/$', 'estoque.views.cadastro', name='cadastro'),
+    url(r'^request_user_pass/$', 'estoque.views.request_user_pass', name='request_user_pass'),
 
     # Autenticação
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login'),

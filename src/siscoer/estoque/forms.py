@@ -92,6 +92,13 @@ class CadastroBaixaForm(Form):
     motivo = ChoiceField(choices=MOTIVO, label=u'Motivo', required=True, widget=Select(attrs={'class' : 'form-control'}))
 
 
+class RecuperarUserPassForm(Form):
+    mail = EmailField(max_length=170, label=u'Digite seu Email', required=True, widget=TextInput(attrs={'class' : 'form-control'}))
 
+    def clean_mail(self):
+        mail = self.cleaned_data['mail']
+        if not Usuario.objects.filter(mail=mail).exists():
+            raise ValidationError(u"E-mail não cadastrado em nosso Sistema!")
+        return mail
 
 
